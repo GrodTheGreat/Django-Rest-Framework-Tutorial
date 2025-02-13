@@ -11,7 +11,7 @@ from snippets.serializers import SnippetSerializer
 
 
 # @csrf_exempt  #! You shouldn't normally do this...
-@api_view(["GET"])
+@api_view(["GET", "POST"])
 def snippet_list(request, format=None):
     """
     List all code snippets, or create a new snippet.
