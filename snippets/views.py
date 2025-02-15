@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+
 # from django.http import HttpResponse, JsonResponse
 # from django.views.decorators.csrf import csrf_exempt
 # from django.http import Http404
@@ -10,7 +12,7 @@ from rest_framework import generics  # , mixins, status
 # from rest_framework.parsers import JSONParser
 
 from snippets.models import Snippet
-from snippets.serializers import SnippetSerializer
+from snippets.serializers import SnippetSerializer, UserSerializer
 
 
 # @csrf_exempt  #! You shouldn't normally do this...
@@ -143,3 +145,13 @@ class SnippetDetail(
 
     # def delete(self, request, *args, **kwargs):
     #     return self.delete(request, *args, **kwargs)
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
