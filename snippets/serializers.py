@@ -31,9 +31,11 @@ from snippets.models import Snippet  # , LANGUAGE_CHOICES, STYLE_CHOICES
 #         return instance
 class SnippetSerializer(serializers.ModelSerializer):
     # This class does all the above automatically thanks to ModelSerializer
+    owner = serializers.ReadOnlyField(source="owner.username")
+
     class Meta:
         model = Snippet
-        fields = ["id", "title", "code", "lineos", "language", "style"]
+        fields = ["id", "title", "code", "lineos", "language", "style", "owner"]
 
 
 class UserSerializer(serializers.ModelSerializer):
