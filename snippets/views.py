@@ -1,11 +1,11 @@
 # from django.http import HttpResponse, JsonResponse
 # from django.views.decorators.csrf import csrf_exempt
-from django.http import Http404
-from rest_framework import generics, mixins, status
+# from django.http import Http404
+from rest_framework import generics  # , mixins, status
 
 # from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.views import APIView
+# from rest_framework.response import Response
+# from rest_framework.views import APIView
 
 # from rest_framework.parsers import JSONParser
 
@@ -52,18 +52,19 @@ from snippets.serializers import SnippetSerializer
 
 
 class SnippetList(
-    mixins.ListModelMixin,  # gives us .list()
-    mixins.CreateModelMixin,  # gives us .create()
-    generics.GenericAPIView,  # Base class for this view
+    # mixins.ListModelMixin,  # gives us .list()
+    # mixins.CreateModelMixin,  # gives us .create()
+    # generics.GenericAPIView,  # Base class for this view
+    generics.ListCreateAPIView
 ):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+    # def get(self, request, *args, **kwargs):
+    #     return self.list(request, *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+    # def post(self, request, *args, **kwargs):
+    #     return self.create(request, *args, **kwargs)
 
 
 # @csrf_exempt  #! You shouldn't normally do this...
@@ -125,19 +126,20 @@ class SnippetList(
 
 
 class SnippetDetail(
-    mixins.RetrieveModelMixin,  # gives us .retrieve
-    mixins.UpdateModelMixin,  # gives us .update
-    mixins.DestroyModelMixin,  # gives us .delete
-    generics.GenericAPIView,  # Base class for this view
+    # mixins.RetrieveModelMixin,  # gives us .retrieve
+    # mixins.UpdateModelMixin,  # gives us .update
+    # mixins.DestroyModelMixin,  # gives us .delete
+    # generics.GenericAPIView,  # Base class for this view
+    generics.RetrieveUpdateDestroyAPIView
 ):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
 
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
+    # def get(self, request, *args, **kwargs):
+    #     return self.retrieve(request, *args, **kwargs)
 
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+    # def put(self, request, *args, **kwargs):
+    #     return self.update(request, *args, **kwargs)
 
-    def delete(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
+    # def delete(self, request, *args, **kwargs):
+    #     return self.delete(request, *args, **kwargs)
