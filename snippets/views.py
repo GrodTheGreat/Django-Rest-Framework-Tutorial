@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # from django.http import HttpResponse, JsonResponse
 # from django.views.decorators.csrf import csrf_exempt
 # from django.http import Http404
-from rest_framework import generics  # , mixins, status
+from rest_framework import generics, permissions  # , mixins, status
 
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
@@ -61,6 +61,7 @@ class SnippetList(
 ):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     # def get(self, request, *args, **kwargs):
     #     return self.list(request, *args, **kwargs)
@@ -139,6 +140,7 @@ class SnippetDetail(
 ):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     # def get(self, request, *args, **kwargs):
     #     return self.retrieve(request, *args, **kwargs)
