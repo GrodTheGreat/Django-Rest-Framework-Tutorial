@@ -68,6 +68,9 @@ class SnippetList(
     # def post(self, request, *args, **kwargs):
     #     return self.create(request, *args, **kwargs)
 
+    def perform_create(self, serializer):
+        return serializer.save(owner=self.request.user)
+
 
 # @csrf_exempt  #! You shouldn't normally do this...
 # @api_view(["GET", "PUT", "DELETE"])
